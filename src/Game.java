@@ -11,13 +11,20 @@ public class Game {
 	    graph.getNodes().get(0);
 	    Edge e12 = new Edge(graph.getNodes().get(0), graph.getNodes().get(1), 1); // create an edge that connects node1 to node2 and contains weight of 5
 	    Edge e13 = new Edge(graph.getNodes().get(0), graph.getNodes().get(2), 2); 
+	    graph.getNodes().get(0).addNeighbour(e12);
+	    graph.getNodes().get(0).addNeighbour(e13);
+	    graph.getNodes().get(1).addNeighbour(e12);
+	    graph.getNodes().get(2).addNeighbour(e13);
 	    graph.addEdge(e12);
 	    graph.addEdge(e13);
 	    System.out.println(graph.getNodes());
 	    System.out.println(graph.getEdges());
+	    graph.getNodes().get(0).printNeighbours();
 	    graph.removeVertex(3);
+	    graph.getNodes().get(0).printNeighbours();
 	    System.out.println(graph.getNodes());
 	    System.out.println(graph.getEdges());
+	    graph.addDollars(graph.getNodes().get(0));
 	    
 	}	
 }

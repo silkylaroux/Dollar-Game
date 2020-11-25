@@ -14,11 +14,24 @@ public class Graph {
 	void removeVertex(int id) {
 	    Vertex v = new Vertex(0,id);
 	    for(Vertex vert: getNodes()) {
+	    	ListIterator<Edge> it = vert.getNeighbours().listIterator();
+    	    while (it.hasNext()) {
+    	        Edge b = it.next();
+    	        
+    	        if(b.getEnd().equals(v) || b.getStart().equals(v) ) {
+    	    		it.remove();
+    	    	}
+    	    }
+	    	
+	    }
+	    
+	    for(Vertex vert: getNodes()) {
 	    	if(vert.equals(v)) {
 	    		getNodes().remove(vert);
 	    		break;
 	    	}
 	    }
+	    
 	    ListIterator<Edge> it = getEdges().listIterator();
 	    while (it.hasNext()) {
 	        Edge b = it.next();
@@ -30,8 +43,8 @@ public class Graph {
 	    
 	}
 	
-	void addDollars() {
-		
+	void addDollars(Vertex v) {
+		v.getNeighbours();
 	}
 	
 	void addEdge(Edge ed) {

@@ -28,8 +28,9 @@ public class Vertex {
             this.neighbours.add(e);
         }
     }
-    public void getNeighbours() {
-        System.out.println("List of all edges that node " + this.id +" has: ");
+    
+    public void printNeighbours() {
+    	System.out.println("List of all edges that node " + this.id +" has: ");
         System.out.println("=================================");
         for (int i = 0; i < this.neighbours.size(); i++ ){
             System.out.println("ID of Edge: " + neighbours.get(i).getId() + "\nID of the first node: " + neighbours.get(i).getIdOfStartNode() + 
@@ -37,6 +38,11 @@ public class Vertex {
             System.out.println();
         }
         System.out.println(neighbours);
+    }
+    
+    public List<Edge> getNeighbours() {
+        
+        return neighbours;
     }
     
     @Override
