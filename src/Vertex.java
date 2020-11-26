@@ -20,6 +20,14 @@ public class Vertex {
         return this.id;
     }
 	
+	public void increaseValue() {
+		value++;
+	}
+	
+	public void decreaseValue() {
+		value--;
+	}
+	
     public void addNeighbour(Edge e) {
         if(this.neighbours.contains(e)) {
             System.out.println("This edge has already been used for this node.");

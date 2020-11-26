@@ -1,5 +1,9 @@
+import javax.swing.JFrame;
 
 public class Game {
+	
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Graph graph = new Graph();
@@ -17,14 +21,23 @@ public class Game {
 	    graph.getNodes().get(2).addNeighbour(e13);
 	    graph.addEdge(e12);
 	    graph.addEdge(e13);
-	    System.out.println(graph.getNodes());
-	    System.out.println(graph.getEdges());
-	    graph.getNodes().get(0).printNeighbours();
-	    graph.removeVertex(3);
-	    graph.getNodes().get(0).printNeighbours();
-	    System.out.println(graph.getNodes());
-	    System.out.println(graph.getEdges());
+//	    System.out.println(graph.getNodes());
+//	    System.out.println(graph.getEdges());
+//	    graph.getNodes().get(0).printNeighbours();
+//	    graph.removeVertex(3);
+//	    graph.getNodes().get(0).printNeighbours();
+//	    System.out.println(graph.getNodes());
+//	    System.out.println(graph.getEdges());
 	    graph.addDollars(graph.getNodes().get(0));
+	    
+	    for(Vertex vert: graph.getNodes()) {
+	    	System.out.println(vert);
+	    }
+	    
+	    Gui gui = new Gui();
+	    JFrame jf = gui.buildFrame();
+	    jf.add(gui.makeButton(graph.getNodes().get(0)));
+	    jf.setVisible(true);
 	    
 	}	
 }

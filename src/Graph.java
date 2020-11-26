@@ -44,7 +44,23 @@ public class Graph {
 	}
 	
 	void addDollars(Vertex v) {
-		v.getNeighbours();
+		
+		ListIterator<Edge> it = v.getNeighbours().listIterator();
+		int decreaseCount = 0;
+	    while (it.hasNext()) {
+	        Edge b = it.next();
+	        
+	        if(b.getEnd().equals(v)  ) {
+	        	decreaseCount++;
+	    		b.getStart().increaseValue();
+	    	}else if(b.getStart().equals(v)) {
+	    		decreaseCount++;
+	    		b.getEnd().increaseValue();
+	    	}
+	    }
+	    for(int x = 0; x < decreaseCount; x++) {
+	    	v.decreaseValue();
+	    }
 	}
 	
 	void addEdge(Edge ed) {
