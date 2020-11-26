@@ -34,10 +34,14 @@ public class Game {
 	    	System.out.println(vert);
 	    }
 	    
+//	    graph.getNodes().size();
+	    
 	    Gui gui = new Gui();
 	    JFrame jf = gui.buildFrame();
-	    jf.add(gui.makeButton(graph.getNodes().get(0)));
+	    jf.add(gui.makeButton(graph.getNodes().get(0),graph));
 	    jf.setVisible(true);
+	    System.out.println(jf.getComponent(0).getHeight() +" "+ jf.getComponent(0).getWidth()+" "+
+	    		jf.getComponent(0).getX()+" "+ jf.getComponent(0).getY());
 	    
 	}	
 }
