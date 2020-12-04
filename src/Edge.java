@@ -1,4 +1,10 @@
 
+/**
+ * @author DNA
+ * This is used to hold the data on the edges of the graph.
+ * An edge has an ID, a vertex for start and end of it, I could probably change this to work better.
+ *
+ */
 public class Edge {
 	private Vertex start;
     private Vertex end;
@@ -47,7 +53,7 @@ public class Edge {
         // typecast o to Complex so that we can compare data members  
         Edge c = (Edge) o; 
           
-        // Compare the data members and return accordingly  
+        // Compare the id's of the edges and return. 
         return id == c.id;
     } 
 }
