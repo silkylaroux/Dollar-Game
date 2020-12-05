@@ -1,4 +1,7 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -6,33 +9,57 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Game {
+	public Graph graph;
 	
+	public Game() {
+		graph = new Graph();
+	}
+	
+	public void generateVertices(int amount) {
+		Random rand = new Random();
+		
+		for(int x = 0; x< amount; x++) {
+			int val = rand.nextInt(6) - 3;
+			graph.addVertex(val, x);
+		}
+	}
+	
+	public void generateEdges() {
+		int id =0;
+		Random rand = new Random();
+		Integer[] placesInList = new Integer[graph.getNodes().size()];
+		for(int x = 0; x < graph.getNodes().size();x++) {
+			placesInList[x]= x;
+		}
+
+		List<Integer> intList = Arrays.asList(placesInList);
+		Collections.shuffle(intList);
+		
+		for(int x = 0; x <intList.size()-1; x+=2) {
+			graph.addEdge(newEdge(graph.getNodes().get(x),graph.getNodes().get(x+1),id));
+			id++;
+		}
+		
+		for(int x = 0; x < graph.getNodes().size(); x++) {
+			int val = rand.nextInt(3-1)+1;
+			for(int y = 0; y < val; y++) {
+				
+			}
+		}
+	}
+	
+	public Edge newEdge(Vertex v1, Vertex v2, int id) {
+		return new Edge(v1,v2,id);
+	}
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Graph graph = new Graph();
-	    graph.addVertex(1,1);
-	    graph.addVertex(2,2);
-	    graph.addVertex(-1,3);
-	    graph.addVertex(-1,4);
-	    graph.addVertex(-1,5);
-	    Edge e12 = new Edge(graph.getNodes().get(0), graph.getNodes().get(1), 1); // create an edge that connects node1 to node2 
-	    Edge e13 = new Edge(graph.getNodes().get(0), graph.getNodes().get(2), 2); 
-	    Edge e23 = new Edge(graph.getNodes().get(1), graph.getNodes().get(2), 3); 
-	    graph.addEdge(e12);
-	    graph.addEdge(e13);
-	    graph.addEdge(e23);
-//	    System.out.println(graph.getNodes());
-//	    System.out.println(graph.getEdges());
-//	    graph.getNodes().get(0).printNeighbours();
-//	    graph.removeVertex(3);
-//	    graph.getNodes().get(0).printNeighbours();
-//	    System.out.println(graph.getNodes());
-//	    System.out.println(graph.getEdges());
-//	    graph.addDollars(graph.getNodes().get(0));
-	    graph.getNodes().size();
+		Game game = new Game();
+		game.generateVertices(6);
+		game.generateEdges();
+		Graph graph = game.graph;
 	    
 	    
 	    Gui gui = new Gui();
