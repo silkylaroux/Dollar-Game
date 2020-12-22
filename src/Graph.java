@@ -73,6 +73,16 @@ public class Graph {
 	    }
 	}
 	
+	public boolean won() {
+		for(Vertex vert: getNodes()) {
+			if(vert.value<0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	void addEdge(Edge ed) {
 		getEdges().add(ed);
 		getNodes().get(getNodeLocation().get(ed.getStart())).addNeighbour(ed);

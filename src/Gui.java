@@ -1,5 +1,8 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,18 +29,28 @@ public class Gui{
 		List<JButton> jbutts = new ArrayList<JButton>();
 		for(int x=0; x <nodes.size(); x++) {
 			JButton newButt = makeButton(nodes.get(x),g);
+			newButt.setBackground(randomColor());
+			newButt.setOpaque(true);
 			jbutts.add(newButt);
 			buttonPlace.putIfAbsent(nodes.get(x),newButt);
 		}
 		return jbutts;
 	}
 	
+	public Color randomColor() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(3);
+		String[] colors = {"#ffcce7","#daf2dc", "#81b7d2"};
+		return Color.decode(colors[randomNumber]);
+		
+	}
+	
 	public void placeButtons(JFrame jf, JButton jb) {
 		Random random = new Random();
 
-		for (int tries = 0; tries < 100; tries++) {
+		for (int tries = 0; tries < 250; tries++) {
             if (intersectsComponent(jb, jf.getContentPane().getComponents())) {
-                jb.setLocation(random.nextInt(600), random.nextInt(600));
+                jb.setLocation(random.nextInt(jf.getSize().height), random.nextInt(jf.getSize().width));
             } else {
             	//buttonPlace.put( value)
                 jf.add(jb);
@@ -73,8 +86,10 @@ public class Gui{
 	}
 	
 	public JFrame buildFrame() {
-		 JFrame f=new JFrame("Button Example");  
-	    f.setSize(400,400);  
+		 JFrame f=new JFrame("Button Example"); 
+		 f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		 f.setSize(900,1650);
+		 f.setLocationRelativeTo(null);
 	    return f;
 	}
 	
@@ -118,6 +133,7 @@ class EdgesPanel extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		((Graphics2D)g).setStroke(new BasicStroke(3));
         for(final Line r : lines) {
             r.paint(g);
         }

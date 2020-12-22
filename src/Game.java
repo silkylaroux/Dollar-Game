@@ -41,9 +41,16 @@ public class Game {
 		}
 		
 		for(int x = 0; x < graph.getNodes().size(); x++) {
-			int val = rand.nextInt(3-1)+1;
+			int val = rand.nextInt(2-1)+1;
+			int temp = 2;
 			for(int y = 0; y < val; y++) {
+				if((x+temp) >= placesInList.length-1) {
+					graph.addEdge(newEdge(graph.getNodes().get(x),graph.getNodes().get(0+temp),id));
+				}else {
+					graph.addEdge(newEdge(graph.getNodes().get(x),graph.getNodes().get(x+temp),id));
+				}
 				
+				temp++;
 			}
 		}
 	}
@@ -57,7 +64,7 @@ public class Game {
 		// TODO Auto-generated method stub
 		
 		Game game = new Game();
-		game.generateVertices(6);
+		game.generateVertices(12);
 		game.generateEdges();
 		Graph graph = game.graph;
 	    
@@ -93,6 +100,9 @@ public class Game {
 	        public void run() {
 	        	for (Vertex name : gui.buttonPlace.keySet())  
 	                gui.buttonPlace.get(name).setText(Integer.toString(name.value));
+	        	if(graph.won()) {
+	        		System.out.println("NICE");
+	        	}
 	        }
 	    }, 0, 1500);
 	    
