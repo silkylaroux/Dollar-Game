@@ -46,13 +46,16 @@ public class Edge {
   
         /* Check if o is an instance of Complex or not 
           "null instanceof [type]" also returns false */
-        if (!(o instanceof Vertex)) { 
+        if (!(o instanceof Edge)) { 
             return false; 
         } 
           
         // typecast o to Complex so that we can compare data members  
         Edge c = (Edge) o; 
-          
+        if( (start.equals(c.start) && end.equals(c.end))
+        		|| (start.equals(c.end) && end.equals(c.start)) ) {
+        	return true;
+        }
         // Compare the id's of the edges and return. 
         return id == c.id;
     } 

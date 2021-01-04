@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,7 +22,7 @@ public class Game {
 		Random rand = new Random();
 		
 		for(int x = 0; x< amount; x++) {
-			int val = rand.nextInt(6) - 3;
+			int val = rand.nextInt(7) - 3;
 			graph.addVertex(val, x);
 		}
 	}
@@ -46,8 +49,10 @@ public class Game {
 			for(int y = 0; y < val; y++) {
 				if((x+temp) >= placesInList.length-1) {
 					graph.addEdge(newEdge(graph.getNodes().get(x),graph.getNodes().get(0+temp),id));
+					id++;
 				}else {
 					graph.addEdge(newEdge(graph.getNodes().get(x),graph.getNodes().get(x+temp),id));
+					id++;
 				}
 				
 				temp++;
@@ -64,14 +69,22 @@ public class Game {
 		// TODO Auto-generated method stub
 		
 		Game game = new Game();
-		game.generateVertices(12);
-		game.generateEdges();
+		
 		Graph graph = game.graph;
 	    
 	    
 	    Gui gui = new Gui();
 	    JFrame jf = gui.buildFrame();
 
+	    
+	    
+	    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    jf.setVisible(true);
+	    int pointCount = gui.makePoints(jf);
+	    game.generateVertices(pointCount);
+		game.generateEdges();
+		
+	    
 	    List<JButton> jbutts = gui.makeButtons(graph);
 	    
 	    
@@ -89,11 +102,8 @@ public class Game {
 	    }
 	    
 	    jf.getContentPane().add(ep);
-	    
-	    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    jf.setVisible(false);
 	    jf.setVisible(true);
-	    
-	    
 	    Timer t = new Timer();
 	    t.schedule(new TimerTask() {
 	        @Override
@@ -101,7 +111,7 @@ public class Game {
 	        	for (Vertex name : gui.buttonPlace.keySet())  
 	                gui.buttonPlace.get(name).setText(Integer.toString(name.value));
 	        	if(graph.won()) {
-	        		System.out.println("NICE");
+	        		System.out.println("NICE");	        		
 	        	}
 	        }
 	    }, 0, 1500);
