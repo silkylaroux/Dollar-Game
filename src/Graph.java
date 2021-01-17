@@ -54,29 +54,44 @@ public class Graph {
 	}
 	
 	void addDollars(Vertex v) {
-		
+		System.out.println(v);
 		ListIterator<Edge> it = v.getNeighbours().listIterator();
 		int decreaseCount = 0;
 	    while (it.hasNext()) {
 	        Edge b = it.next();
-	        
-	        if(b.getEnd().equals(v)  ) {
-	        	decreaseCount++;
+	        System.out.println(b);
+	        if(b.getEnd().equals(v) && !b.getStart().equals(v) ) {
 	    		b.getStart().increaseValue();
-	    	}else if(b.getStart().equals(v)) {
-	    		decreaseCount++;
+	    	}else if(b.getStart().equals(v) && !b.getEnd().equals(v) ) {
 	    		b.getEnd().increaseValue();
 	    	}
+    		decreaseCount++;
 	    }
 	    for(int x = 0; x < decreaseCount; x++) {
 	    	v.decreaseValue();
 	    }
 	}
 	
+	public boolean won() {
+		if(getNodes()==null) {
+			return false;
+		}
+		for(Vertex vert: getNodes()) {
+			if(vert.value<0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	void addEdge(Edge ed) {
-		getEdges().add(ed);
-		getNodes().get(getNodeLocation().get(ed.getStart())).addNeighbour(ed);
-		getNodes().get(getNodeLocation().get(ed.getEnd())).addNeighbour(ed);
+		
+		boolean ed1 = getNodes().get(getNodeLocation().get(ed.getStart())).addNeighbour(ed);
+		boolean ed2 = getNodes().get(getNodeLocation().get(ed.getEnd())).addNeighbour(ed);
+		if(ed1 && ed2) {
+			getEdges().add(ed);
+		}
 	}
 
 	public List<Vertex> getNodes() {

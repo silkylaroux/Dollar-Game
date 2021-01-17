@@ -1,5 +1,8 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -21,23 +25,52 @@ public class Gui{
 		buttonPlace = new HashMap<Vertex,JButton>();
 	}
 	
+	public int makePoints(JFrame jf) {
+		Object[] possibilities = {"3","4","5","6","7","8","9","10"};
+		String s = (String)JOptionPane.showInputDialog(
+		                    jf,
+		                    "Choose how many buttons:\n",
+		                    "Customized Dialog",
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,
+		                    possibilities,
+		                    "ham");
+
+		//If a string was returned, say so.
+		if ((s != null) && (s.length() > 0)) {
+		    return (int)Integer.valueOf(s);
+		}
+		return -1;
+	}
+	
 	public List<JButton> makeButtons(Graph g){
 		List<Vertex> nodes = g.getNodes();
 		List<JButton> jbutts = new ArrayList<JButton>();
 		for(int x=0; x <nodes.size(); x++) {
 			JButton newButt = makeButton(nodes.get(x),g);
+			newButt.setBackground(randomColor());
+			newButt.setOpaque(true);
 			jbutts.add(newButt);
 			buttonPlace.putIfAbsent(nodes.get(x),newButt);
 		}
 		return jbutts;
 	}
 	
+	public Color randomColor() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(3);
+		String[] colors = {"#ffcce7","#daf2dc", "#81b7d2"};
+		return Color.decode(colors[randomNumber]);
+		
+	}
+	
 	public void placeButtons(JFrame jf, JButton jb) {
 		Random random = new Random();
 
-		for (int tries = 0; tries < 100; tries++) {
+		for (int tries = 0; tries < 250; tries++) {
             if (intersectsComponent(jb, jf.getContentPane().getComponents())) {
-                jb.setLocation(random.nextInt(600), random.nextInt(600));
+                jb.setLocation(random.nextInt(jf.getSize().width-70), random.nextInt(jf.getSize().height-70));
+//                jb.setLocation(random.nextInt(1080), random.nextInt(900));
             } else {
             	//buttonPlace.put( value)
                 jf.add(jb);
@@ -73,8 +106,10 @@ public class Gui{
 	}
 	
 	public JFrame buildFrame() {
-		 JFrame f=new JFrame("Button Example");  
-	    f.setSize(400,400);  
+		 JFrame f=new JFrame("Button Example"); 
+		 f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		 f.setSize(1920,1080);
+		 f.setLocationRelativeTo(null);
 	    return f;
 	}
 	
@@ -113,11 +148,12 @@ class EdgesPanel extends JPanel{
 	private final ArrayList<Line> lines = new ArrayList<Line>();
 
     public void addLine(int x1, int y1, int x2, int y2) {
-        this.lines.add(new Line(x1, y1, x2, y2));
+        this.lines.add(new Line(x1+25, y1+25, x2+25, y2+25));
     }
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		((Graphics2D)g).setStroke(new BasicStroke(3));
         for(final Line r : lines) {
             r.paint(g);
         }

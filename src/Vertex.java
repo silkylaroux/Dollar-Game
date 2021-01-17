@@ -28,12 +28,19 @@ public class Vertex {
 		value--;
 	}
 	
-    public void addNeighbour(Edge e) {
-        if(this.neighbours.contains(e)) {
+    public boolean addNeighbour(Edge e) {
+        if(this.neighbours.contains(e) || (this.equals(e.getEnd()) && this.equals(e.getStart()))) {
             System.out.println("This edge has already been used for this node.");
-        } else {
+            return false;
+        } 
+//        if(this.neighbours.size()>=4){
+//        	System.out.println("This adds too many edges for this node.");
+//        	return false;
+//        }
+        else {
             System.out.println("Successfully added " + e);
             this.neighbours.add(e);
+            return true;
         }
     }
     
