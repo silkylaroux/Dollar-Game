@@ -66,17 +66,13 @@ public class Game {
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		Game game = new Game();
-		
 		Graph graph = game.graph;
 	    
 	    
 	    Gui gui = new Gui();
 	    JFrame jf = gui.buildFrame();
-
-	    
 	    
 	    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    jf.setVisible(true);
@@ -114,7 +110,7 @@ public class Game {
 	        		System.out.println("NICE");	        		
 	        	}
 	        }
-	    }, 0, 1500);
+	    }, 0, 1000);
 	    
 	}	
 }

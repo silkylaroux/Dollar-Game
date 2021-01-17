@@ -106,7 +106,7 @@ public class Gui{
 	}
 	
 	public JFrame buildFrame() {
-		 JFrame f=new JFrame("Button Example"); 
+		 JFrame f=new JFrame("Dollar Game"); 
 		 f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		 f.setSize(1920,1080);
 		 f.setLocationRelativeTo(null);
