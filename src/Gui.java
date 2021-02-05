@@ -26,7 +26,7 @@ public class Gui{
 	}
 	
 	public int makePoints(JFrame jf) {
-		Object[] possibilities = {"3","4","5","6","7","8","9","10"};
+		Object[] possibilities = {"3","4","5","7","8","9","10"};
 		String s = (String)JOptionPane.showInputDialog(
 		                    jf,
 		                    "Choose how many buttons:\n",
@@ -106,11 +106,18 @@ public class Gui{
 	}
 	
 	public JFrame buildFrame() {
-		 JFrame f=new JFrame("Button Example"); 
+		 JFrame f=new JFrame("Dollar Game"); 
 		 f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		 f.setSize(1920,1080);
 		 f.setLocationRelativeTo(null);
 	    return f;
+	}
+	
+	public boolean buildWinScreen() {
+		
+		return JOptionPane.showConfirmDialog(null, "Want Another Game?", "NEW GAME",
+		        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+		
 	}
 	
 	
@@ -145,7 +152,7 @@ class ActionListenerExample implements ActionListener{
 }
 
 class EdgesPanel extends JPanel{
-	private final ArrayList<Line> lines = new ArrayList<Line>();
+	private ArrayList<Line> lines = new ArrayList<Line>();
 
     public void addLine(int x1, int y1, int x2, int y2) {
         this.lines.add(new Line(x1+25, y1+25, x2+25, y2+25));
