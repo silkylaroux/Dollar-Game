@@ -33,10 +33,10 @@ public class Vertex {
             System.out.println("This edge has already been used for this node.");
             return false;
         } 
-//        if(this.neighbours.size()>=4){
-//        	System.out.println("This adds too many edges for this node.");
-//        	return false;
-//        }
+        if(this.neighbours.size()>=4){
+        	System.out.println("This adds too many edges for this node.");
+        	return false;
+        }
         else {
             System.out.println("Successfully added " + e);
             this.neighbours.add(e);
